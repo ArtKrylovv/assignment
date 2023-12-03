@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Google Finance" parallel="methods" thread-count="1">
+    <listeners>
+        <listener class-name="com.krylov.assignment.listeners.WebTestListener"></listener>
+    </listeners>
+    <test name="Google Finance">
+        <classes>
+            <class name="com.krylov.assignment.web.GoogleFinanceTest"></class>
+        </classes>
+    </test>
+</suite>
