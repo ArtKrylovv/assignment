@@ -12,7 +12,7 @@ public class GoogleFinanceTest extends AbstractTest {
     private static final Logger LOGGER = LogManager.getLogger(GoogleFinanceTest.class);
 
     public void closingPriceTest()  {
-        String ticker = "AAPL";
+        String ticker = "GOOGL";
 
         HomePage page = new HomePage(driver);
         LOGGER.info("Opening home page");

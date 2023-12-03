@@ -7,15 +7,20 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class TickerPage extends AbstractPage {
     private static final String PARTIAL_URL = "https://www.google.com/finance/quote/";
     private static final Logger LOGGER = LogManager.getLogger(TickerPage.class);
 
-    @FindBy(xpath = "//div[contains(text(), 'Prev close ')]")
+    @FindBy(xpath = "//div[contains(text(), 'Prev close')]")
     List<WebElement> closingPriceOnChartList;
+
+    @FindBy(xpath = "//*[text()='Financials']")
+    WebElement financialsBlock;
 
     public TickerPage(WebDriver driver) {
         super(driver);
@@ -27,21 +32,20 @@ public class TickerPage extends AbstractPage {
     }
 
     public Float getClosingPriceFromChartAsFloat() {
-        int attempt = 1;
-        while (attempt <= 10) {
+        // wait ensures page elements are loaded
+        int attempts = 1;
+        while (attempts <= 10) {
+            wait.until(ExpectedConditions.visibilityOf(financialsBlock));
             try {
-                for (WebElement el : closingPriceOnChartList) {
-                    if (el.isDisplayed()) {
-                        String closingPrice = el.getText();
-                        return PriceParser.priceParser(closingPrice);
-                    }
-                }
+                String rawPrice = closingPriceOnChartList.stream()
+                        .filter(el -> el.isDisplayed()).findFirst().get().getText();
+                return PriceParser.priceParser(rawPrice);
             } catch (StaleElementReferenceException e) {
-                LOGGER.error("Price is not retrieved on " + attempt + " attempt");
-                attempt++;
+                attempts++;
+                LOGGER.info("Closing price is not retrieved");
             }
         }
-        LOGGER.error("Price can not be retrieved");
+        LOGGER.info("Closing price can not be retrieved");
         return null;
     }
 }

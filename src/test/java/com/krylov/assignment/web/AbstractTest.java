@@ -20,7 +20,6 @@ public class AbstractTest {
         LOGGER.info("Initializing local driver for: " + browser);
         initializeLocalBrowser(browser);
         driver.manage().window().maximize();
-
     }
 
     @AfterMethod
@@ -41,7 +40,7 @@ public class AbstractTest {
                 this.driver = new SafariDriver();
                 break;
             default:
-                LOGGER.error("Browser not implemented");
+                LOGGER.error("Browser is not implemented");
                 throw new IllegalArgumentException();
         }
     }
