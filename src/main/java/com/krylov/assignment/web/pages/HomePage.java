@@ -34,22 +34,14 @@ public class HomePage extends AbstractPage{
     }
 
     public void inputSearchQuery(String query){
-        for(WebElement el: searchFieldList){
-            if(el.isDisplayed()){
-                el.sendKeys(query);
-            }
-        }
+        searchFieldList.stream().filter(el-> el.isDisplayed())
+                .findFirst().get().sendKeys(query);
     }
 
     public TickerPage selectFromSearchOptionsList(String dataSymbol) {
         wait.until(ExpectedConditions.visibilityOf(tabAll));
-        for(WebElement el: searchOptionsList){
-            if(el.getAttribute("data-symbol").equals(dataSymbol)){
-                el.click();
-                return new TickerPage(driver);
-            }
-        }
-        LOGGER.error("Desired ticker not found in Search Options List");
-        return null;
+            searchOptionsList.stream()
+                    .filter(el -> el.getAttribute("data-symbol").equals(dataSymbol)).findFirst().get().click();
+            return new TickerPage(driver);
     }
 }

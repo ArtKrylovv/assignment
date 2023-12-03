@@ -16,11 +16,10 @@ public class AbstractTest {
 
     @BeforeMethod
     public void setup() {
-        Browsers browser = Browsers.CHROME;
+        Browsers browser = Browsers.SAFARI;
         LOGGER.info("Initializing local driver for: " + browser);
         initializeLocalBrowser(browser);
         driver.manage().window().maximize();
-
     }
 
     @AfterMethod
