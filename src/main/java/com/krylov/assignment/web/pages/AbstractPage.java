@@ -15,7 +15,6 @@ public abstract class AbstractPage {
         PageFactory.initElements(driver, this);
         this.driver=driver;
         this.wait= new WebDriverWait(driver, Duration.ofSeconds(TIMEOUT));
-
     }
     public abstract boolean isOpen();
 }

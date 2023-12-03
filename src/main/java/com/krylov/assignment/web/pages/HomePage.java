@@ -39,9 +39,13 @@ public class HomePage extends AbstractPage{
     }
 
     public TickerPage selectFromSearchOptionsList(String dataSymbol) {
+        // wait ensures options list is loaded
         wait.until(ExpectedConditions.visibilityOf(tabAll));
-            searchOptionsList.stream()
-                    .filter(el -> el.getAttribute("data-symbol").equals(dataSymbol)).findFirst().get().click();
-            return new TickerPage(driver);
+        WebElement option = searchOptionsList.stream()
+                    .filter(el -> el.getAttribute("data-symbol").equals(dataSymbol)).findFirst().get();
+        // wait fixes intermittent missed click for Safari
+        wait.until(ExpectedConditions.elementToBeClickable(option));
+        option.click();
+        return new TickerPage(driver);
     }
 }
