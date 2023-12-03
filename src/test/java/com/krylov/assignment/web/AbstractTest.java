@@ -12,7 +12,7 @@ import org.testng.annotations.BeforeMethod;
 
 public class AbstractTest {
     private static final Logger LOGGER = LogManager.getLogger(AbstractTest.class);
-    WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeMethod
     public void setup() {

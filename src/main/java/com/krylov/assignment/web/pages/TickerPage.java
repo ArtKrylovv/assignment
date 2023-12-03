@@ -14,12 +14,12 @@ public class TickerPage extends AbstractPage {
     private static final String PARTIAL_URL = "https://www.google.com/finance/quote/";
     private static final Logger LOGGER = LogManager.getLogger(TickerPage.class);
 
+    @FindBy(xpath = "//div[contains(text(), 'Prev close ')]")
+    List<WebElement> closingPriceOnChartList;
+
     public TickerPage(WebDriver driver) {
         super(driver);
     }
-
-    @FindBy(xpath = "//div[contains(text(), 'Prev close ')]")
-    List<WebElement> closingPriceOnChartList;
 
     @Override
     public boolean isOpen() {

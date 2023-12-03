@@ -8,8 +8,8 @@ import java.time.Duration;
 
 public abstract class AbstractPage {
     private static final int TIMEOUT = 5;
-    WebDriver driver;
-    Wait<WebDriver> wait;
+    protected WebDriver driver;
+    protected Wait<WebDriver> wait;
 
     public AbstractPage(WebDriver driver){
         PageFactory.initElements(driver, this);
