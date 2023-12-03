@@ -24,7 +24,7 @@ public class AbstractTest {
 
     @AfterMethod
     public void teardown() {
-        LOGGER.info("Quiting the driver");
+        LOGGER.info("Quiting the browser");
         driver.quit();
     }
 
@@ -40,7 +40,7 @@ public class AbstractTest {
                 this.driver = new SafariDriver();
                 break;
             default:
-                LOGGER.error("Browser is not implemented");
+                LOGGER.error("Browser "+browser+" is not implemented");
                 throw new IllegalArgumentException();
         }
     }

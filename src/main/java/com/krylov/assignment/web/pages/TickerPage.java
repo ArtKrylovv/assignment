@@ -34,6 +34,7 @@ public class TickerPage extends AbstractPage {
     public Float getClosingPriceFromChartAsFloat() {
         // wait ensures page elements are loaded
         int attempts = 1;
+        // loop fixes intermittent stall exception for Safari
         while (attempts <= 10) {
             wait.until(ExpectedConditions.visibilityOf(financialsBlock));
             try {

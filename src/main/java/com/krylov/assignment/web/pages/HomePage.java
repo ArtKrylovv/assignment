@@ -9,7 +9,6 @@ import java.util.List;
 
 public class HomePage extends AbstractPage{
     private static final String URL = "https://www.google.com/finance/";
-    private static final Logger LOGGER = LogManager.getLogger(HomePage.class);
 
     @FindBy(xpath = "//*[@aria-label='Search for stocks, ETFs & more']")
     List<WebElement> searchFieldList;
