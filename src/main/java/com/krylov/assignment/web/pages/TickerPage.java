@@ -33,10 +33,10 @@ public class TickerPage extends AbstractPage {
 
     public Float getClosingPriceFromChartAsFloat() {
         // wait ensures page elements are loaded
+        wait.until(ExpectedConditions.visibilityOf(financialsBlock));
         int attempts = 1;
         // loop fixes intermittent stall exception for Safari
         while (attempts <= 10) {
-            wait.until(ExpectedConditions.visibilityOf(financialsBlock));
             try {
                 String rawPrice = closingPriceOnChartList.stream()
                         .filter(el -> el.isDisplayed()).findFirst().get().getText();
